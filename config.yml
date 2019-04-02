@@ -1,0 +1,13 @@
+first-name:
+  - names/first-names.json
+middle-name:
+  - names/middle-names.json
+last-name:
+  - names/names.json
+places:
+  - names/places.json
+general-names:
+  - names/first-names.json
+  - names/middle-names.json
+  - names/names.json
+  - names/places.json

@@ -1,7 +1,11 @@
 import json
-import sys
+import argparse
 from tqdm import tqdm
 import numpy as np
+import yaml
+
+
+    
 
 def generate_prob(files):
     transition_prob = {}
@@ -45,17 +49,27 @@ def generate_prob(files):
                 pass
     initial_prob_matrix /= initial_prob_matrix.sum()
     transition_prob_matrix = (transition_prob_matrix.T/transition_prob_matrix.sum(axis=1)).T
-    return unique_letters, initial_prob_matrix, transition_prob_matrix
+    return unique_letters, initial_prob_matrix.tolist(), transition_prob_matrix.tolist()
+    
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("config_file",help="YAML file used to create matrix")
+    parser.add_argument("output", help="json file containing the matrices")
+    args = parser.parse_args()
+    returns = {}
+    with open(args.config_file) as f:
+        config = yaml.load(f)
+        for key,value in config.items():
+            unique_letters, initial_prob_matrix, transition_prob_matrix = generate_prob(value)
+            returns[key] = {"unique_letters":unique_letters,\
+                            "initial_prob_matrix":initial_prob_matrix,\
+                            "transition_prob_matrix":transition_prob_matrix}
+    with open(args.output,"w") as f:
+        json.dump(returns, f)
+
     
 
 
 
-def main():
-    unique_letters, initial_prob_matrix, transition_prob_matrix = generate_prob(["names.json"])
-    with open("maggia.json","w",encoding="utf-8") as f:
-        json.dump({"unique_letters":unique_letters,\
-                    "initial_prob_matrix":initial_prob_matrix.tolist(),\
-                    "transition_prob_matrix":transition_prob_matrix.tolist()},f)
-
-if __name__ == "__main__":
-    main()
+    

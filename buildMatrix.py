@@ -48,7 +48,8 @@ def generate_prob(files):
             except:
                 pass
     initial_prob_matrix /= initial_prob_matrix.sum()
-    transition_prob_matrix = (transition_prob_matrix.T/transition_prob_matrix.sum(axis=1)).T
+    initial_prob_matrix = initial_prob_matrix.cumsum().round(5)
+    transition_prob_matrix = (transition_prob_matrix.T/transition_prob_matrix.sum(axis=1)).T.cumsum(axis=1).round(5)
     return unique_letters, initial_prob_matrix.tolist(), transition_prob_matrix.tolist()
     
 

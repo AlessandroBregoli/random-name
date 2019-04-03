@@ -1,0 +1,2 @@
+import randomnames.randomnames
+from randomnames.randomnames import RandomNames

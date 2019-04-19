@@ -13,7 +13,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/AlessandroBregoli/randomnames",
     packages=["randomnames"],
-    package_data={'mypkg': ['data/*']},
+    scripts=["scripts/rndnames"],
+    package_data={'randomnames': ['data/*','data/names/*']},
     install_requires=[
         "wheel",
         "numpy",

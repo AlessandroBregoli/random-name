@@ -1,0 +1,35 @@
+#! python3
+
+from randomnames import RandomNames
+import random
+import sys
+import warnings
+if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
+    r = RandomNames()
+    r.generate_from_config_file()
+    if len(sys.argv) == 1:
+        name_len = random.randint(5,10)
+        name_type = "general-names"
+        initial = ""
+    elif len(sys.argv) == 2:
+        try:
+            name_len = int(sys.argv[1]) 
+            name_type = "general-names"
+            initial = ""
+        except:
+            name_type = sys.argv[1]
+            name_len = random.randint(5,10)
+            initial = ""
+    elif len(sys.argv) == 3:
+        name_type = sys.argv[1]
+        name_len = int(sys.argv[2])
+        initial = ""
+    else:
+        name_type = sys.argv[1]
+        name_len = int(sys.argv[2])
+        initial = sys.argv[3]
+
+    print(r.generate_random_name(name_type,name_len, initial))
+
+

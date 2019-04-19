@@ -83,7 +83,7 @@ class RandomNames:
             ret_string = np.random.choice(self.prob_matrices[name_type]["unique_letters"],\
                                 p=self.prob_matrices[name_type]["initial_prob_matrix"])
         
-        for _ in range(len(init),length):
+        for _ in range(len(ret_string),length):
             ret_string += np.random.choice(self.prob_matrices[name_type]["unique_letters"],\
                                 p=self.prob_matrices[name_type]["transition_prob_matrix"]\
                                     [self.prob_matrices[name_type]["unique_letters"].index(ret_string[-1])])
